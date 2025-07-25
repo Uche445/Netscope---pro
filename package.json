@@ -1,0 +1,62 @@
+{
+  "name": "netscope-dashboard",
+  "version": "1.0.0",
+  "description": "A dashboard application built with React and Tailwind CSS.",
+  "main": "src/main.jsx",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "keywords": [
+    "react",
+    "dashboard",
+    "tailwindcss"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.3",
+    "axios": "^1.10.0",
+    "class-variance-authority": "^0.7.1",
+    "classnames": "^2.5.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "express": "^5.1.0",
+    "framer-motion": "^12.23.0",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.525.0",
+    "ping": "^0.4.4",
+    "react": "^18.3.1",
+    "react-circular-progressbar": "^2.2.0",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "^5.0.1",
+    "recharts": "^3.0.2",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "babel-loader": "^8.2.3",
+    "jest": "^27.0.6",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.4",
+    "tailwindcss-animate": "^1.0.7",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^5.2.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
