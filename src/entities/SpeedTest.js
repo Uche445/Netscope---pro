@@ -3,7 +3,7 @@
 // Define your backend API URL.
 // In development, this might be your local backend (e.g., http://localhost:5000).
 // In production (after deployment), Netlify will inject REACT_APP_API_URL.
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000'; // Default to local for dev
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://netspeed-backend.onrender.com'; // Default to local for dev
 
 export class SpeedTest {
   constructor(data) {
