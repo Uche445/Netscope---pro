@@ -1,46 +1,59 @@
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Menu } from 'lucide-react';
+
 import Sidebar from './components/ui/Sidebar';
 import Dashboard from './pages/SpeedTestPage';
 import Analytics from './pages/Analytics';
 import Diagnostics from './pages/Diagnostics';
 
-// This MUST match the `w-64` defined in your Sidebar component, which is 256px.
-const SIDEBAR_WIDTH_PX = 256; 
-
 export default function App() {
+  // State to manage the sidebar's open/closed state for mobile view
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Function to toggle the sidebar's visibility
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <Router>
-      {/* Outer container for the whole layout. flex ensures sidebar and content are side-by-side. */}
-      <div className="flex min-h-screen"> 
+      <div className="flex min-h-screen bg-slate-950 text-white">
         
-        {/* The Fixed Sidebar */}
-        {/* We pass the classes to make it fixed to the Sidebar component via the `className` prop */}
-        <Sidebar className="fixed top-0 left-0 h-full z-50" /> 
         {/*
-            `fixed`: Makes it fixed relative to the viewport.
-            `top-0`, `left-0`: Positions it at the top-left corner of the viewport.
-            `h-full`: Makes it span the full height of the viewport.
-            `z-50`: Ensures it layers above other content.
-            The background, border, etc., are handled internally by your Sidebar.jsx
+          The new Sidebar component, which is now controlled by state.
+          It will be hidden on mobile by default and can be opened with the toggle button.
+          On larger screens, it's always visible.
         */}
-        
-        {/* Main Content Area: Takes the remaining horizontal space and handles its own vertical scrolling */}
-        <main 
-          className="flex-1 overflow-y-auto" // `flex-1` allows it to fill space, `overflow-y-auto` enables scrolling
-          style={{ marginLeft: `${SIDEBAR_WIDTH_PX}px` }} // Pushes content away from the fixed sidebar
-        >
-          {/* Each Route element (Dashboard, Analytics, Diagnostics) will render here.
-            If you want a consistent background (like cyber-gradient) across all pages, 
-            you can add it to this `main` tag, along with `min-h-screen`.
-            Example: <main className="flex-1 overflow-y-auto min-h-screen cyber-gradient" ...>
-            Otherwise, keep the backgrounds defined within each page component (e.g., SpeedTestPage).
+        <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
+
+        {/* This container ensures the content area can grow and scroll independently */}
+        <div className="flex flex-col flex-1">
+          {/*
+            A responsive header that only appears on small screens (`lg:hidden`).
+            It contains the app's title and a button to open the sidebar.
           */}
-          <Routes>
-            <Route path="/"           element={<Dashboard />} />
-            <Route path="/analytics"  element={<Analytics />} />
-            <Route path="/diagnostics"element={<Diagnostics />} />
-          </Routes>
-        </main>
+          <header className="flex items-center justify-between p-4 bg-white/5 lg:hidden">
+            <h1 className="text-xl font-semibold tracking-wide">
+              Net<span className="text-cyan-400">Scope Pro</span>
+            </h1>
+            <button onClick={toggleSidebar} className="p-1 rounded-md text-slate-500 hover:text-white">
+              <Menu size={24} />
+            </button>
+          </header>
+
+          {/* The main content area. The `lg:ml-64` class is crucial here.
+            It provides a left margin on large screens to make space for the sidebar,
+            but on smaller screens, it has no margin, allowing the content to fill the screen.
+          */}
+          <main className="flex-1 p-8 overflow-y-auto lg:ml-64">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/analytics" element={<Analytics />} />
+              <Route path="/diagnostics" element={<Diagnostics />} />
+            </Routes>
+          </main>
+        </div>
       </div>
     </Router>
   );
